@@ -1,0 +1,69 @@
+/* index.css */
+
+/* Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-Image: "https://th.bing.com/th/id/OIP.uNMnnnJpGz6EW4bqMoF5EgHaEm?w=271&h=180&c=7&r=0&o=5&dpr=1.4&pid=1.7')";
+  background-color: #e6e4e9;
+}
+
+/* Container styles */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Heading styles */
+ h2, h3, h4, h5, h6 {
+  color: #6dcb4b; /* Bootstrap primary color */
+}
+h1{color: #ff8e00;}
+
+/* Link styles */
+a {
+  color: #473dd5; /* Bootstrap primary color */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+footer {
+  background-color: #2a3d55;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}
+/* Button styles */
+.btn {
+  border-radius: 5px; /* Rounded corners for buttons */
+}
+
+/* Card styles */
+.card {
+  border: 1px solid #dee2e6; /* Light border for cards */
+  border-radius: 8px; /* Rounded corners */
+  transition: transform 0.2s; /* Smooth scaling on hover */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Scale effect on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+      padding: 10px; /* Less padding on smaller screens */
+  }
+}
