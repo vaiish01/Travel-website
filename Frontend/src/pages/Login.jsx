@@ -1,29 +1,29 @@
 import React, { useState } from "react";
-import api from "../services/api";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate(); // Initialize navigate
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      // Send login request to the backend
-      const response = await api.post("/users/login", { email, password });
-
-      // Store the token in localStorage
-      localStorage.setItem("token", response.data.token);
-      console.log("Stored Token:", localStorage.getItem("token")); // Debugging
-
-      // Redirect user to the dashboard after successful login
-      navigate("/dashboard"); // Navigate to the dashboard page
-    } catch (err) {
-      setError("Invalid email or password");
-    }
+    const successMessage = `Login Successful! Welcome back, ${formData.email}`;
+    localStorage.setItem("loginMessage", successMessage);
+    alert(successMessage);
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 2000);
   };
 
   return (
@@ -45,8 +45,8 @@ const Login = () => {
           padding: "40px",
           borderRadius: "10px",
           boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
-          width: "50%", // Increased width
-          maxWidth: "500px", // Limit max width
+          width: "50%",
+          maxWidth: "500px",
           textAlign: "center",
         }}
       >
@@ -55,9 +55,10 @@ const Login = () => {
         </h2>
         <input
           type="email"
+          name="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formData.email}
+          onChange={handleChange}
           style={{
             padding: "15px",
             marginBottom: "15px",
@@ -69,9 +70,10 @@ const Login = () => {
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.password}
+          onChange={handleChange}
           style={{
             padding: "15px",
             marginBottom: "15px",
@@ -84,7 +86,7 @@ const Login = () => {
         <button
           type="submit"
           style={{
-            backgroundColor: "#28a745", // Updated color to green
+            backgroundColor: "#28a745",
             color: "white",
             padding: "15px",
             border: "none",
@@ -97,17 +99,6 @@ const Login = () => {
         >
           Login
         </button>
-        {error && (
-          <p
-            style={{
-              color: "red",
-              marginTop: "15px",
-              fontSize: "16px",
-            }}
-          >
-            {error}
-          </p>
-        )}
       </form>
     </div>
   );
